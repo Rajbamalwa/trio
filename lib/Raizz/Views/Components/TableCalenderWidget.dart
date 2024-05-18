@@ -33,7 +33,7 @@ class _CalenderWidgetState extends State<CalenderWidget> {
     _focusedDay = DateTime.now();
     _calendarFormat = CalendarFormat.month;
     _selectedDay = DateTime.now();
-    _firstDay = DateTime.now();
+    _firstDay = DateTime.now().subtract(Duration(days: 365));
     _lastDay = DateTime.now().add(const Duration(days: 1000));
   }
 
@@ -45,6 +45,10 @@ class _CalenderWidgetState extends State<CalenderWidget> {
     return Container(
       height: 400,
       width: width,
+      decoration: BoxDecoration(
+        color: white,
+        borderRadius: BorderRadius.circular(12),
+      ),
       child: SingleChildScrollView(
         child: TableCalendar(
           pageJumpingEnabled: true,

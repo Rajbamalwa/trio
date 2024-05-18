@@ -18,6 +18,17 @@ class RaizHomeScreen extends StatefulWidget {
 class _RaizHomeScreenState extends State<RaizHomeScreen> {
   String _selectedValue = "Item 1";
   final List<String> _dropdownItems = ['Item 1', 'Item 2', 'Item 3', 'Item 4'];
+  String _selectedDate = "Today";
+
+  final List<String> _datesItems = [
+    'Today',
+    'Yesterday',
+    'Last week',
+    'Last 30 days',
+    "Last Month",
+    "Last 90 days"
+  ];
+
   int touchedIndex = -1;
   double _currentValue = 1;
 
@@ -95,7 +106,25 @@ class _RaizHomeScreenState extends State<RaizHomeScreen> {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(16.0),
                           ),
+                          backgroundColor: transparent,
                           elevation: 0,
+                          title: Padding(
+                            padding: const EdgeInsets.only(bottom: 10),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: white,
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              height: 40,
+                              child: CustomDropdownField(
+                                labelText: "Select date",
+                                items: _datesItems,
+                                value: _selectedDate,
+                                Hint: "Select date",
+                                onChanged: (value) {},
+                              ),
+                            ),
+                          ),
                           content:
                               StatefulBuilder(builder: (context, setState) {
                             return CalenderWidget();
