@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:trio/trio/Views/ServiceScreen.dart';
+
+import 'Raizz/Views/RaizHomeScreen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,10 +12,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const GetMaterialApp(
+    return GetMaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
-      home: ServicesScreen(),
+      home: RaizHomeScreen(),
     );
   }
 }
