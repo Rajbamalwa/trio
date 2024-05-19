@@ -6,6 +6,8 @@ Color white = Colors.white;
 Color transparent = Colors.transparent;
 Color secondaryTextColor = Colors.grey.withOpacity(0.7);
 Color grey = Colors.grey;
+Color green = Colors.green;
+
 Color pink = Colors.pink;
 Color red = Colors.red;
 Color purple = Colors.purple;

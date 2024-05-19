@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'Raizz/Views/RaizHomeScreen.dart';
+import 'Raizz/Views/Inventory/InventoryScreen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
-      home: RaizHomeScreen(),
+      home: InventoryScreen(),
     );
   }
 }

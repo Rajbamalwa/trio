@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../Constants/colors.dart';
-import '../../Widgets/CustomText/CustomText.dart';
+import '../../../Widgets/CustomText/CustomText.dart';
 
 class IncomeWidget extends StatefulWidget {
   final from;
@@ -95,7 +95,9 @@ class _IncomeWidgetState extends State<IncomeWidget> {
                   SizedBox(
                     width: width * 0.8,
                     child: CustomText(
-                      "Revenue per Service",
+                      widget.from == "Expense"
+                          ? "Expense per Service "
+                          : "Revenue per Service",
                       black,
                       20,
                       FontWeight.w600,
@@ -105,61 +107,80 @@ class _IncomeWidgetState extends State<IncomeWidget> {
                   ),
                 ],
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 40, right: 30),
-                child: SizedBox(
-                  width: width * 0.8,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
+              Stack(
+                children: [
+                  Column(
                     children: [
-                      CustomText(
-                        "Hair salon",
-                        black,
-                        12,
-                        FontWeight.w500,
-                        TextOverflow.clip,
-                        TextAlign.start,
+                      Padding(
+                        padding: const EdgeInsets.only(left: 40, right: 30),
+                        child: SizedBox(
+                          width: width * 0.8,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              CustomText(
+                                "Hair salon",
+                                black,
+                                12,
+                                FontWeight.w500,
+                                TextOverflow.clip,
+                                TextAlign.start,
+                              ),
+                              CustomText(
+                                "₹ 15,000",
+                                primaryColor,
+                                12,
+                                FontWeight.w500,
+                                TextOverflow.clip,
+                                TextAlign.start,
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
-                      CustomText(
-                        "₹ 15,000",
-                        primaryColor,
-                        12,
-                        FontWeight.w500,
-                        TextOverflow.clip,
-                        TextAlign.start,
+                      Padding(
+                        padding: const EdgeInsets.only(left: 40, right: 30),
+                        child: SizedBox(
+                          width: width * 0.8,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              CustomText(
+                                "Makeup",
+                                black,
+                                12,
+                                FontWeight.w500,
+                                TextOverflow.clip,
+                                TextAlign.start,
+                              ),
+                              CustomText(
+                                "₹ 15,000",
+                                primaryColor,
+                                12,
+                                FontWeight.w500,
+                                TextOverflow.clip,
+                                TextAlign.start,
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
                     ],
                   ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 40, right: 30),
-                child: SizedBox(
-                  width: width * 0.8,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      CustomText(
-                        "Makeup",
-                        black,
-                        12,
-                        FontWeight.w500,
-                        TextOverflow.clip,
-                        TextAlign.start,
-                      ),
-                      CustomText(
-                        "₹ 15,000",
-                        primaryColor,
-                        12,
-                        FontWeight.w500,
-                        TextOverflow.clip,
-                        TextAlign.start,
-                      ),
-                    ],
+                  Padding(
+                    padding: const EdgeInsets.only(left: 20, right: 30),
+                    child: CustomText(
+                      "|\n|-----\n|\n|\n|-----",
+                      primaryColor,
+                      4,
+                      FontWeight.w600,
+                      TextOverflow.clip,
+                      TextAlign.start,
+                    ),
                   ),
-                ),
+                ],
               ),
               SizedBox(
                 height: 30,
@@ -189,80 +210,138 @@ class _IncomeWidgetState extends State<IncomeWidget> {
                   ),
                 ],
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
+              Stack(
                 children: [
-                  Expanded(
-                    child: AspectRatio(
-                      aspectRatio: 1,
-                      child: PieChart(
-                        PieChartData(
-                          borderData: FlBorderData(
-                            show: false,
-                          ),
-                          sectionsSpace: 0,
-                          centerSpaceRadius: 20,
-                          sections: showingSections(),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Row(
-                        children: [
-                          Container(
-                            height: 30,
-                            width: 30,
-                            color: primaryColor,
-                          ),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          SizedBox(
-                            width: width * 0.3,
-                            child: CustomText(
-                              "Hair salon",
-                              black,
-                              10,
-                              FontWeight.w400,
-                              TextOverflow.clip,
-                              TextAlign.start,
+                      Flexible(
+                        child: AspectRatio(
+                          aspectRatio: 1,
+                          child: PieChart(
+                            PieChartData(
+                              borderData: FlBorderData(
+                                show: false,
+                              ),
+                              sectionsSpace: 0,
+                              centerSpaceRadius: 10,
+                              sections: showingSections(),
                             ),
                           ),
-                        ],
+                        ),
                       ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      Row(
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          Container(
-                            height: 30,
-                            width: 30,
-                            color: primaryColor.withOpacity(0.3),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              SizedBox(
+                                child: CustomText(
+                                  "30%",
+                                  black,
+                                  10,
+                                  FontWeight.w400,
+                                  TextOverflow.clip,
+                                  TextAlign.start,
+                                ),
+                              ),
+                              SizedBox(
+                                width: 5,
+                              ),
+                              Container(
+                                height: 20,
+                                width: 20,
+                                color: primaryColor.withOpacity(0.3),
+                              ),
+                              SizedBox(
+                                width: 5,
+                              ),
+                              SizedBox(
+                                width: width * 0.2,
+                                child: CustomText(
+                                  "Hair salon",
+                                  black,
+                                  10,
+                                  FontWeight.w400,
+                                  TextOverflow.clip,
+                                  TextAlign.start,
+                                ),
+                              ),
+                            ],
                           ),
                           SizedBox(
-                            width: 5,
+                            height: 5,
                           ),
-                          SizedBox(
-                            width: width * 0.3,
-                            child: CustomText(
-                              "Makeup",
-                              black,
-                              10,
-                              FontWeight.w400,
-                              TextOverflow.clip,
-                              TextAlign.start,
-                            ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              SizedBox(
+                                child: CustomText(
+                                  "70%",
+                                  black,
+                                  10,
+                                  FontWeight.w400,
+                                  TextOverflow.clip,
+                                  TextAlign.start,
+                                ),
+                              ),
+                              SizedBox(
+                                width: 5,
+                              ),
+                              Container(
+                                height: 20,
+                                width: 20,
+                                color: primaryColor,
+                              ),
+                              SizedBox(
+                                width: 5,
+                              ),
+                              SizedBox(
+                                width: width * 0.2,
+                                child: CustomText(
+                                  "Makeup",
+                                  black,
+                                  10,
+                                  FontWeight.w400,
+                                  TextOverflow.clip,
+                                  TextAlign.start,
+                                ),
+                              ),
+                            ],
                           ),
                         ],
-                      ),
+                      )
                     ],
-                  )
+                  ),
+                  Positioned(
+                    top: 70,
+                    bottom: 0,
+                    right: 0,
+                    left: 0,
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: 25,
+                          width: width * 0.17,
+                          child: Divider(
+                            color: black,
+                            thickness: 1.5,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 25,
+                          width: width * 0.17,
+                          child: Divider(
+                            color: black,
+                            thickness: 1.5,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               ),
               SizedBox(
@@ -352,6 +431,9 @@ class _IncomeWidgetState extends State<IncomeWidget> {
                     _currentValue = value;
                   });
                 },
+              ),
+              SizedBox(
+                height: 100,
               ),
             ],
           ),

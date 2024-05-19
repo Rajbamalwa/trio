@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:trio/Raizz/Views/Components/TableCalenderWidget.dart';
-import 'package:trio/Raizz/Widgets/CustomText/CustomText.dart';
+ import 'package:trio/Raizz/Widgets/CustomText/CustomText.dart';
 import 'package:trio/Raizz/Widgets/DropDownButton/DropDownButtonWidget.dart';
 
-import '../Constants/colors.dart';
-import '../Widgets/TabBar/TabBarWidget.dart';
+import '../../Constants/colors.dart';
+import '../../Widgets/TabBar/TabBarWidget.dart';
+ import 'Components/TableCalenderWidget.dart';
 import 'Components/Widgets.dart';
 
 class RaizHomeScreen extends StatefulWidget {
