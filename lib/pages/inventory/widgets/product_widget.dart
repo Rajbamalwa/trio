@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:trio/Raizz/Views/Inventory/InventoryUpdateScreen.dart';
-import 'package:trio/Raizz/Widgets/CustomText/CustomText.dart';
 
-import '../../../Constants/colors.dart';
+import '../../../utils/raizz_constants/colors.dart';
+import '../../../utils/raizz_global_widget/CustomText/CustomText.dart';
+import '../view/raizz_inventory_update.dart';
 
 class ProductWidget extends StatelessWidget {
   final data;

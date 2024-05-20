@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
- import 'package:trio/Raizz/Widgets/CustomText/CustomText.dart';
-import 'package:trio/Raizz/Widgets/DropDownButton/DropDownButtonWidget.dart';
 
-import '../../Constants/colors.dart';
-import '../../Widgets/TabBar/TabBarWidget.dart';
- import 'Components/TableCalenderWidget.dart';
-import 'Components/Widgets.dart';
+import '../../../Constants/colors.dart';
+import '../../../utils/raizz_constants/string_constants.dart';
+import '../../../utils/raizz_global_widget/CustomText/CustomText.dart';
+import '../../../utils/raizz_global_widget/DropDownButton/DropDownButtonWidget.dart';
+import '../../../utils/raizz_global_widget/TabBar/TabBarWidget.dart';
+import '../widgets/calender_widget.dart';
+import '../widgets/income_widget.dart';
 
 class RaizHomeScreen extends StatefulWidget {
   const RaizHomeScreen({super.key});
@@ -20,22 +21,12 @@ class _RaizHomeScreenState extends State<RaizHomeScreen> {
   final List<String> _dropdownItems = ['Item 1', 'Item 2', 'Item 3', 'Item 4'];
   String _selectedDate = "Today";
 
-  final List<String> _datesItems = [
-    'Today',
-    'Yesterday',
-    'Last week',
-    'Last 30 days',
-    "Last Month",
-    "Last 90 days"
-  ];
-
   int touchedIndex = -1;
   double _currentValue = 1;
 
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
+    var size = MediaQuery.of(context).size;
 
     return Scaffold(
       appBar: AppBar(
@@ -49,6 +40,7 @@ class _RaizHomeScreenState extends State<RaizHomeScreen> {
           TextOverflow.clip,
           TextAlign.center,
         ),
+        leading: Icon(Icons.menu),
         actions: [
           IconButton(
             onPressed: () {},
@@ -59,14 +51,17 @@ class _RaizHomeScreenState extends State<RaizHomeScreen> {
           )
         ],
       ),
-      drawer: Drawer(),
+      // drawer: Drawer(),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding:
-                const EdgeInsets.only(left: 24, right: 24, top: 20, bottom: 10),
+            padding: EdgeInsets.only(
+                left: size.width * 0.04,
+                right: size.width * 0.04,
+                top: size.height * 0.02,
+                bottom: size.height * 0.02),
             child: SizedBox(
               height: 40,
               child: CustomDropdownField(
@@ -118,7 +113,7 @@ class _RaizHomeScreenState extends State<RaizHomeScreen> {
                               height: 40,
                               child: CustomDropdownField(
                                 labelText: "Select date",
-                                items: _datesItems,
+                                items: DATE_ITEM,
                                 value: _selectedDate,
                                 Hint: "Select date",
                                 onChanged: (value) {},
@@ -129,14 +124,6 @@ class _RaizHomeScreenState extends State<RaizHomeScreen> {
                               StatefulBuilder(builder: (context, setState) {
                             return CalenderWidget();
                           }),
-                          // actions: [
-                          //   TextButton(
-                          //     onPressed: () {
-                          //       Navigator.of(context).pop();
-                          //     },
-                          //     child: Text('OK'),
-                          //   ),
-                          // ],
                         );
                       },
                     );
@@ -176,14 +163,12 @@ class _RaizHomeScreenState extends State<RaizHomeScreen> {
                     child: TabBarView(
                       physics: ScrollPhysics(),
                       children: [
-                        SingleChildScrollView(
-                            child: IncomeWidget(
+                        IncomeWidget(
                           from: "Income",
-                        )),
-                        SingleChildScrollView(
-                            child: IncomeWidget(
+                        ),
+                        IncomeWidget(
                           from: "Expense",
-                        )),
+                        ),
                       ],
                     ),
                   ),

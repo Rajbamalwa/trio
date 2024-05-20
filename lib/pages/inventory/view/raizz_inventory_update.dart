@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:trio/Raizz/Widgets/TextField/TextFieldWidget.dart';
+import 'package:trio/utils/extension/sized_box_extension.dart';
 
 import '../../../Constants/colors.dart';
-import '../../Widgets/Button/CustomButton.dart';
-import '../../Widgets/CustomText/CustomText.dart';
-import '../../Widgets/DropDownButton/DropDownButtonWidget.dart';
+import '../../../trio/Widgets/Button/CustomButton.dart';
+import '../../../utils/raizz_global_widget/CustomText/CustomText.dart';
+import '../../../utils/raizz_global_widget/DropDownButton/DropDownButtonWidget.dart';
+import '../../../utils/raizz_global_widget/TextField/TextFieldWidget.dart';
 
 class InventoryUpdateScreen extends StatefulWidget {
   final data;
@@ -78,9 +79,7 @@ class _InventoryUpdateScreenState extends State<InventoryUpdateScreen> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(
-            height: 20,
-          ),
+          20.h,
           Row(
             children: [
               Container(
@@ -88,9 +87,7 @@ class _InventoryUpdateScreenState extends State<InventoryUpdateScreen> {
                 width: 10,
                 color: primaryColor,
               ),
-              const SizedBox(
-                width: 10,
-              ),
+              10.w,
               SizedBox(
                   width: width * 0.8,
                   child: CustomText("Edit Inventory", black, 32,
@@ -217,7 +214,7 @@ class _InventoryUpdateScreenState extends State<InventoryUpdateScreen> {
             ],
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 10,right: 10,top: 20),
+            padding: const EdgeInsets.only(left: 10, right: 10, top: 20),
             child: Center(
               child: CustomButton(
                 text: "Save",

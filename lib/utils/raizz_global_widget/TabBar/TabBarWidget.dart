@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../Constants/colors.dart';
+import '../../raizz_constants/colors.dart';
 
 class TabBarMenu extends StatelessWidget {
   const TabBarMenu({

@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:trio/utils/extension/sized_box_extension.dart';
+import 'package:trio/utils/raizz_constants/string_constants.dart';
 
-import '../../Constants/colors.dart';
-import '../../Widgets/CustomText/CustomText.dart';
-import '../../Widgets/DropDownButton/DropDownButtonWidget.dart';
-import '../../Widgets/TabBar/TabBarWidget.dart';
-import '../../Widgets/TextField/TextFieldWidget.dart';
+import '../../../utils/raizz_constants/colors.dart';
+import '../../../utils/raizz_global_widget/CustomText/CustomText.dart';
+import '../../../utils/raizz_global_widget/DropDownButton/DropDownButtonWidget.dart';
+import '../../../utils/raizz_global_widget/TabBar/TabBarWidget.dart';
+import '../../../utils/raizz_global_widget/TextField/TextFieldWidget.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -23,11 +25,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
   late TextEditingController attendanceController;
   String _selectedSort = "Hair";
 
-  final List<String> _sortItems = [
-    'Hair',
-    'Face',
-    'Body',
-  ];
   @override
   void initState() {
     // TODO: implement initState
@@ -42,9 +39,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: white,
@@ -73,9 +67,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(
-              height: 20,
-            ),
+            20.h,
             Center(
               child: SizedBox(
                 height: 100,
@@ -208,7 +200,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             // width: width * 0.4,
             child: CustomDropdownField(
               labelText: "Category",
-              items: _sortItems,
+              items: SORT_ITEM,
               value: _selectedSort,
               Hint: "Category",
               onChanged: (value) {
@@ -295,7 +287,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
             shrinkWrap: true,
             scrollDirection: Axis.horizontal,
             padding: const EdgeInsets.only(left: 20),
-
             itemBuilder: (context, index) {
               return Padding(
                 padding: const EdgeInsets.all(8.0),

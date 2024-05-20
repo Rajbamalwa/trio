@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:trio/Raizz/Views/Inventory/Components/productWidget.dart';
-import 'package:trio/Raizz/Views/Profile/ProfileScreen.dart';
+import 'package:trio/pages/profile/view/raizz_profile.dart';
+import 'package:trio/utils/extension/sized_box_extension.dart';
 
-import '../../Constants/colors.dart';
-import '../../Widgets/CustomText/CustomText.dart';
-import '../../Widgets/DropDownButton/DropDownButtonWidget.dart';
+import '../../../utils/raizz_constants/colors.dart';
+import '../../../utils/raizz_constants/string_constants.dart';
+import '../../../utils/raizz_global_widget/CustomText/CustomText.dart';
+import '../../../utils/raizz_global_widget/DropDownButton/DropDownButtonWidget.dart';
+import '../widgets/product_widget.dart';
 
 class InventoryScreen extends StatefulWidget {
   const InventoryScreen({super.key});
@@ -38,12 +40,6 @@ class _InventoryScreenState extends State<InventoryScreen> {
   ];
   String _selectedSort = "Cost Price";
 
-  final List<String> _sortItems = [
-    'Cost Price',
-    'Category',
-    'Units Left',
-  ];
-
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -61,6 +57,7 @@ class _InventoryScreenState extends State<InventoryScreen> {
           TextOverflow.clip,
           TextAlign.center,
         ),
+        leading: Icon(Icons.menu),
         actions: [
           IconButton(
             onPressed: () {
@@ -73,7 +70,6 @@ class _InventoryScreenState extends State<InventoryScreen> {
           )
         ],
       ),
-      drawer: Drawer(),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -89,9 +85,7 @@ class _InventoryScreenState extends State<InventoryScreen> {
                     width: 10,
                     color: primaryColor,
                   ),
-                  const SizedBox(
-                    width: 10,
-                  ),
+                  10.w,
                   SizedBox(
                       width: width * 0.5,
                       child: CustomText("Inventory", black, 32, FontWeight.w500,
@@ -155,7 +149,7 @@ class _InventoryScreenState extends State<InventoryScreen> {
                                           height: 40,
                                           child: CustomDropdownField(
                                             labelText: "Select date",
-                                            items: _sortItems,
+                                            items: SORT_ITEM,
                                             value: _selectedSort,
                                             Hint: "Select date",
                                             onChanged: (value) {
@@ -168,18 +162,6 @@ class _InventoryScreenState extends State<InventoryScreen> {
                                         ),
                                       ),
                                     ),
-                                    // content:
-                                    // StatefulBuilder(builder: (context, setState) {
-                                    //   return CalenderWidget();
-                                    // }),
-                                    // actions: [
-                                    //   TextButton(
-                                    //     onPressed: () {
-                                    //       Navigator.of(context).pop();
-                                    //     },
-                                    //     child: Text('OK'),
-                                    //   ),
-                                    // ],
                                   ),
                                 ),
                               ],
@@ -209,7 +191,7 @@ class _InventoryScreenState extends State<InventoryScreen> {
             ],
           ),
           inventoryList.isEmpty
-              ? SizedBox()
+              ? const SizedBox()
               : Expanded(
                   child: ListView.builder(
                     shrinkWrap: true,
