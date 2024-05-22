@@ -1,24 +1,61 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:trio/utils/extension/sized_box_extension.dart';
-import 'package:trio/utils/raizz_constants/string_constants.dart';
 
 import '../../../utils/raizz_constants/colors.dart';
 import '../../../utils/raizz_global_widget/CustomText/CustomText.dart';
-import '../../../utils/raizz_global_widget/DropDownButton/DropDownButtonWidget.dart';
 import '../../../utils/raizz_global_widget/TabBar/TabBarWidget.dart';
 import '../../../utils/raizz_global_widget/TextField/TextFieldWidget.dart';
+import '../widget/service_widget.dart';
 
-class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({super.key});
+List servicesItem = [
+  {
+    "service": "Haircut",
+    "by": "Vikar",
+    "category": "Hair",
+    "date": "2 march, 2024",
+    "mrp": 200,
+  },
+  {
+    "service": "Haircut",
+    "by": "Vikar",
+    "category": "Hair",
+    "date": "2 march, 2024",
+    "mrp": 200,
+  },
+  {
+    "service": "Haircut",
+    "by": "Vikar",
+    "category": "Hair",
+    "date": "2 march, 2024",
+    "mrp": 200,
+  },
+  {
+    "service": "Haircut",
+    "by": "Vikar",
+    "category": "Hair",
+    "date": "2 march, 2024",
+    "mrp": 200,
+  },
+  {
+    "service": "Haircut",
+    "by": "Vikar",
+    "category": "Hair",
+    "date": "2 march, 2024",
+    "mrp": 200,
+  },
+];
+
+class CustomerProfile extends StatefulWidget {
+  const CustomerProfile({super.key});
 
   @override
-  State<ProfileScreen> createState() => _ProfileScreenState();
+  State<CustomerProfile> createState() => _CustomerProfileState();
 }
 
-class _ProfileScreenState extends State<ProfileScreen> {
+class _CustomerProfileState extends State<CustomerProfile> {
   late TextEditingController nameController;
-  late TextEditingController emailController;
+  late TextEditingController wtController;
   late TextEditingController phoneController;
   late TextEditingController dobController;
   late TextEditingController expController;
@@ -30,15 +67,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
     // TODO: implement initState
     super.initState();
     nameController = TextEditingController(text: "Jully Moris");
-    emailController = TextEditingController(text: "jully@gmail.com");
+    wtController = TextEditingController(text: "+919999998884");
     phoneController = TextEditingController(text: "+919999998884");
     dobController = TextEditingController(text: "20 - 08 - 1995");
     expController = TextEditingController(text: "4 Years");
     attendanceController = TextEditingController(text: "24");
   }
 
+  ScrollController scrollController = ScrollController();
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: white,
@@ -124,8 +164,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ),
                         child: TabBarMenu(
                           tabTitle: const [
+                            "Services details",
                             "Personal details",
-                            "Employment details"
                           ],
                           onTap: (int i) {},
                         ),
@@ -135,8 +175,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       child: TabBarView(
                         physics: ScrollPhysics(),
                         children: [
-                          personalDataWidget(),
-                          employmentDataWidget(),
+                          serviceDetails(size),
+                          personalDetails(size),
                         ],
                       ),
                     ),
@@ -150,7 +190,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
-  Widget personalDataWidget() {
+  Widget personalDetails(size) {
     return SingleChildScrollView(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -161,15 +201,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
             maxLines: 1,
             controller: nameController,
           ),
-          eventAddHeading("Email"),
-          CustomField(
-            maxLines: 1,
-            controller: emailController,
-          ),
           eventAddHeading("Phone number"),
           CustomField(
             maxLines: 1,
             controller: phoneController,
+          ),
+          eventAddHeading("Whatsapp number"),
+          CustomField(
+            maxLines: 1,
+            controller: wtController,
+            suffixIcon: Image.asset(
+              "assets/images/whatsapp.png",
+              scale: 20,
+              height: 40,
+              width: 40,
+            ),
           ),
           eventAddHeading("Date of Birth"),
           CustomField(
@@ -182,131 +228,97 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
-  Widget employmentDataWidget() {
+  Widget serviceDetails(size) {
     return SingleChildScrollView(
+      controller: scrollController,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          eventAddHeading("Experience"),
-          CustomField(
-            maxLines: 1,
-            controller: expController,
-          ),
-          eventAddHeading("Services Provided"),
           Padding(
-            padding: const EdgeInsets.only(left: 16, right: 16),
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: primaryColor.withOpacity(0.05),
-              ),
-              // width: width * 0.4,
-              child: CustomDropdownField(
-                labelText: "Category",
-                items: PARLOUR_ITEM,
-                value: _selectedSort,
-                Hint: "Category",
-                onChanged: (value) {
-                  setState(() {
-                    _selectedSort = value;
-                  });
-                },
-              ),
+            padding: const EdgeInsets.fromLTRB(20, 20, 20, 10),
+            child: Row(
+              children: [
+                CustomText(
+                  "Service Frequency: ",
+                  black,
+                  12,
+                  FontWeight.w700,
+                  TextOverflow.ellipsis,
+                  TextAlign.left,
+                ),
+                CustomText(
+                  "25 days",
+                  primaryColor,
+                  12,
+                  FontWeight.w700,
+                  TextOverflow.ellipsis,
+                  TextAlign.left,
+                ),
+              ],
             ),
           ),
-          eventAddHeading("Attendance"),
-          CustomField(
-            maxLines: 1,
-            controller: attendanceController,
-            suffixIcon: Icon(
-              Icons.add,
-            ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  eventAddHeading("Rating"),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(20, 0, 20, 6),
-                    child: RatingBar.builder(
-                      initialRating: 3,
-                      minRating: 1,
-                      direction: Axis.horizontal,
-                      allowHalfRating: true,
-                      itemCount: 5,
-                      itemPadding: EdgeInsets.symmetric(horizontal: 2.0),
-                      itemBuilder: (context, _) => const Icon(
-                        Icons.star,
-                        size: 10,
-                        color: Colors.amber,
+          Padding(
+            padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  width: size.width * 0.3,
+                  child: CustomText(
+                    "Service History",
+                    black,
+                    12,
+                    FontWeight.w600,
+                    TextOverflow.ellipsis,
+                    TextAlign.left,
+                  ),
+                ),
+                SizedBox(
+                  width: size.width * 0.5,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      CustomText(
+                        "Date Range: ",
+                        black,
+                        12,
+                        FontWeight.w600,
+                        TextOverflow.ellipsis,
+                        TextAlign.right,
                       ),
-                      itemSize: 20,
-                      onRatingUpdate: (rating) {
-                        print(rating);
-                      },
-                    ),
+                      SizedBox(
+                          width: size.width * 0.2,
+                          child: Text(
+                            " Last 3 Months",
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            textAlign: TextAlign.left,
+                            style: GoogleFonts.poppins(
+                              fontSize: 12,
+                              color: primaryColor,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          )),
+                    ],
                   ),
-                ],
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  eventAddHeading("Last Month Rating"),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(20, 0, 20, 6),
-                    child: RatingBar.builder(
-                      initialRating: 3,
-                      minRating: 1,
-                      direction: Axis.horizontal,
-                      allowHalfRating: true,
-                      itemCount: 5,
-                      itemPadding: EdgeInsets.symmetric(horizontal: 2.0),
-                      itemBuilder: (context, _) => const Icon(
-                        Icons.star,
-                        size: 10,
-                        color: Colors.amber,
-                      ),
-                      itemSize: 20,
-                      onRatingUpdate: (rating) {
-                        print(rating);
-                      },
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-          eventAddHeading("Certificates"),
-          SizedBox(
-            height: 120,
-            child: ListView.builder(
-              itemCount: 10,
-              shrinkWrap: true,
-              scrollDirection: Axis.horizontal,
-              padding: const EdgeInsets.only(left: 20),
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    height: 100,
-                    width: 100,
-                    decoration: BoxDecoration(
-                      color: grey.withOpacity(0.6),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                  ),
-                );
-              },
+                ),
+              ],
             ),
           ),
-          30.h,
+          ListView.builder(
+            shrinkWrap: true,
+            controller: scrollController,
+            itemCount: servicesItem.length,
+            padding: EdgeInsets.fromLTRB(14, 10, 14, 10),
+            itemBuilder: (context, index) {
+              return ServiceWidget(
+                data: servicesItem[index],
+              );
+            },
+          ),
         ],
       ),
     );

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:trio/pages/home/view/raizz_home.dart';
+import 'package:trio/pages/profile/view/raizz_profile.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
     return const GetMaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
-      home: RaizHomeScreen(),
+      home: ProfileScreen(),
     );
   }
 }

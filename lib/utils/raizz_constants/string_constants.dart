@@ -11,3 +11,11 @@ const List<String> SORT_ITEM = [
   'Category',
   'Units Left',
 ];
+
+const List<String> PARLOUR_ITEM = [
+  'Hair',
+  'Face',
+  'Body',
+  "Hair cut",
+  "Facial"
+];
